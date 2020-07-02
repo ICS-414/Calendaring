@@ -1,0 +1,29 @@
+{
+  "name": "calendaring",
+  "version": "1.0.0",
+  "description": "Calendar Project",
+  "main": "ics.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fix": "eslint --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimothyNicdao/Calendaring.git"
+  },
+  "author": "Timothy Nicdao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimothyNicdao/Calendaring/issues"
+  },
+  "homepage": "https://github.com/TimothyNicdao/Calendaring#readme",
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.5"
+  }
+}
