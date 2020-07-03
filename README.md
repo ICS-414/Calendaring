@@ -1,5 +1,13 @@
 # ICS414 Summer 2020 Calendar (.ics) team assignment
 
+## Table of Contents
+- [Description](#Description)
+- [User Stories](#User-Stories)
+
+---
+
+### Description
+
 Your team assignment is a variation on a commonly used tool: calendaring. This is not difficult, but requires attention to detail. You will work in teams.
 
 Your system will generate event files – you are not building a system to read
@@ -27,3 +35,13 @@ Required functionality. You must demonstrate the following are implemented:
 - Sent-by (3.2.18)
 - Resources (3.8.1.10)
 - And aspects (your choice) of recurring events (3.8.5). Recurring events (and exceptions to recurrences) can be very complicated. Start small and do what you can. For example, you might want to start with being able to schedule a meeting on the 25th of every month. Then add the ability to do exceptions, such as “except in December”).
+
+---
+
+### User Stories
+
+1. As a student, I want to set time to study so I can hold myself accountable.
+2. As a council member, I want to set a recurring event for weekly meetings.
+3. As a teacher, I want to add notes to the event so I know what to talk about during the set meeting.
+4. As a student, I want to set a location so I know where to meet my teammates. 
+
