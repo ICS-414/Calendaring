@@ -1,8 +1,8 @@
 # ICS414 Summer 2020 Calendar (.ics) team assignment
 
 ## Table of Contents
-- [Description](Description)
-- [User Stories](User-Stories)
+- [Description](#Description)
+- [User Stories](#User-Stories)
 
 ---
 
