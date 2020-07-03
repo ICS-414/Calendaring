@@ -1,5 +1,5 @@
 // Pass in components to build the ICS file
-class Ics {
+export default class Ics {
   constructor(vevents = [], prodID, version, timezone) {
     this.prodID = 'PRODID:' + (prodID || '-//Google Inc//Google Calendar 70.9054//EN');
     this.version = 'VERSION:' + (version || '2.0');
@@ -11,7 +11,7 @@ class Ics {
     const output = `BEGIN:VCALENDAR'
      ${this.prodID}
      ${this.version}
-     ${this.events.reduce((accumulator, currentVal) => accumulator + currentVal.build(), '')}
+     ${this.events.reduce((accumulator, currentVal) => accumulator + currentVal.build() + '/n', '')}
      END:VCALENDAR`;
 
     return output;

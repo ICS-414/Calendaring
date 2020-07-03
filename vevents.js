@@ -1,14 +1,14 @@
-class Vevents {
-  constructor(summary, classification, description, start, end, priority, location, latitude, longtitude) {
+export default class Vevents {
+  constructor(summary, classification, description, start, end, priority, latitude, longtitude, location) {
     this.summary = 'SUMMARY:' + summary;
     this.classification = 'CLASS:' + (classification || 'PUBLIC');
     this.description = 'DESCRIPTION:' +  description;
     this.start = 'DTSTART:' + start;
     this.end = 'DTEND:' + end;
     this.proirity = 'PRIORITY:' + priority;
-    this.location = location;
     this.modified = new Date();
     this.geo = 'GEO:' + latitude + ';' + longtitude;
+    // this.location = location;
     // this.created = created; -- not sure if we need this
   }
 
