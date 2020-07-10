@@ -1,14 +1,16 @@
 export default class Vevents {
-  constructor(summary, classification, description, start, end, priority, latitude, longtitude, location) {
-    this.summary = 'SUMMARY:' + summary;
+  constructor(classification, latitude, longtitude, location, priority, summary, start, end) {
+    this.begin = 'Begin:VEVENT';
     this.classification = 'CLASS:' + (classification || 'PUBLIC');
-    this.description = 'DESCRIPTION:' +  description;
-    this.start = 'DTSTART:' + start;
-    this.end = 'DTEND:' + end;
-    this.proirity = 'PRIORITY:' + priority;
-    this.modified = new Date();
     this.geo = 'GEO:' + latitude + ';' + longtitude;
-    // this.location = location;
+    this.summary = 'SUMMARY:' + summary;
+    this.start = 'DTSTART;VALUE=DATE:' + start;
+    this.end = 'DTEND;VALUE=DATE:' + end;
+    this.priority = 'PRIORITY:' + priority;
+    this.location = 'LOCATION:' + location;
+    this.ending = 'END:VEVENT';
+    // this.description = 'DESCRIPTION:' +  description;
+    // this.modified = new Date();
     // this.created = created; -- not sure if we need this
   }
 
@@ -26,7 +28,3 @@ export default class Vevents {
     return output;
   }
 }
-
- let e = new Vevents('Tim test', 'PUBLIC', 'To test');
-
- console.log(e.build());
