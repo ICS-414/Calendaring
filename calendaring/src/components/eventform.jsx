@@ -6,7 +6,6 @@ import Vevents from '../vevents';
 import Ics from '../ics';
 import fileDownload from 'js-file-download';
 
-
 const options = [
   { key: 'm', text: 'Malee', value: 'male' },
   { key: 'f', text: 'Female', value: 'female' },
@@ -16,6 +15,21 @@ const options = [
 const classificatication = [
   {text: 'Public', value:'PUBLIC'},
   {text: 'Private', value:'PRIVATE'}
+]
+
+const recurrOptions = [
+    { text: 'Weekly', value: 'WEEKLY' },
+    { text: 'Daily', value: 'DAILY' }
+]
+
+const dayOptions = [
+    { text: 'Monday', value: 'MO'}, 
+    { text: 'Tuesday', value: 'TU'}, 
+    { text: 'Wednday', value: 'WE'}, 
+    { text: 'Thursday', value: 'TH'}, 
+    { text: 'Friday', value: 'FR'}, 
+    { text: 'Saturday', value: 'SA'}, 
+    { text: 'Sunday', value: 'SU'}
 ]
 
 class EventForm extends Component {
@@ -45,7 +59,8 @@ class EventForm extends Component {
       start: new Date(),
       end: new Date(),  
       priority:'',
-      location:'',
+      location: '',
+      recurr: '',
   }
 
   
@@ -71,10 +86,10 @@ class EventForm extends Component {
   
 
   handleSubmit = () => {
-    let {classification, latitude, longtitude, location, priority, summary, start, end} = this.state; 
+    let {classification, latitude, longtitude, location, priority, summary, start, end, recurr} = this.state; 
     start = this.buildDate(start);
     end = this.buildDate(end);
-    let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end)];
+    let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end, recurr)];
     let icsCalendar = new Ics(icsEvent);
     let calendar = icsCalendar.build();
     console.log(this.state);
@@ -82,7 +97,7 @@ class EventForm extends Component {
   }
 
   render() { 
-    const{classification, latitude, longtitude, summary, start, end, priority, location} = this.state;
+    const{classification, latitude, longtitude, summary, start, end, priority, location, recurr} = this.state;
 
     return (  
       <React.Fragment>
@@ -164,6 +179,14 @@ class EventForm extends Component {
           width={2}
           onChange={this.handleChange}
           name='location'
+        />
+        <Form.Field
+          control={Select}
+          options={recurrOptions}
+          label='Recurring'
+          placeholder='Recurring'
+          name='recurr'
+          onChange={this.handleChange}
         />
       </Form>
       <button
