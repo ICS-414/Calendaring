@@ -18,18 +18,21 @@ const classificatication = [
 ]
 
 const recurrOptions = [
+    { text: 'Yearly', value: 'YEARLY' },
     { text: 'Weekly', value: 'WEEKLY' },
-    { text: 'Daily', value: 'DAILY' }
+    { text: 'Daily', value: 'DAILY' },
+    { text: 'None', value: '' }
 ]
 
-const dayOptions = [
-    { text: 'Monday', value: 'MO'}, 
-    { text: 'Tuesday', value: 'TU'}, 
-    { text: 'Wednday', value: 'WE'}, 
-    { text: 'Thursday', value: 'TH'}, 
-    { text: 'Friday', value: 'FR'}, 
-    { text: 'Saturday', value: 'SA'}, 
-    { text: 'Sunday', value: 'SU'}
+const countOptions = [
+    { text: 'Indefinitely', value: '' },
+    { text: '1', value: 'COUNT=1' },
+    { text: '2', value: 'COUNT=2' }
+    { text: '3', value: 'COUNT=3' },
+    { text: '4', value: 'COUNT=4' },
+    { text: '5', value: 'COUNT=5' },
+    { text: '10', value: 'COUNT=10' },
+    { text: '20', value: 'COUNT=20' },
 ]
 
 class EventForm extends Component {
@@ -61,6 +64,7 @@ class EventForm extends Component {
       priority:'',
       location: '',
       recurr: '',
+      count: '',
   }
 
   
@@ -86,7 +90,7 @@ class EventForm extends Component {
   
 
   handleSubmit = () => {
-    let {classification, latitude, longtitude, location, priority, summary, start, end, recurr} = this.state; 
+    let {classification, latitude, longtitude, location, priority, summary, start, end, recurr, count} = this.state; 
     start = this.buildDate(start);
     end = this.buildDate(end);
     let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end, recurr)];
@@ -97,7 +101,7 @@ class EventForm extends Component {
   }
 
   render() { 
-    const{classification, latitude, longtitude, summary, start, end, priority, location, recurr} = this.state;
+    const{classification, latitude, longtitude, summary, start, end, priority, location, recurr, count} = this.state;
 
     return (  
       <React.Fragment>
@@ -180,14 +184,26 @@ class EventForm extends Component {
           onChange={this.handleChange}
           name='location'
         />
-        <Form.Field
-          control={Select}
-          options={recurrOptions}
-          label='Recurring'
-          placeholder='Recurring'
-          name='recurr'
-          onChange={this.handleChange}
-        />
+        <Form.Group inline>
+          <Form.Input
+            width={6}
+            control={Select}
+            options={recurrOptions}
+            label='Recurring'
+            placeholder='Recurring'
+            name='recurr'
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            width={6}
+            control={Select}
+            options={countOptions}
+            label='Count'
+            placeholder='Count'
+            name='count'
+            onChange={this.handleChange}
+          />
+        /Form.Group>
       </Form>
       <button
         onClick={this.handleSubmit}
