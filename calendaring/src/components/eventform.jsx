@@ -113,7 +113,11 @@ class EventForm extends Component {
   }
 
   handlePlaceChange = (location) => {
-    console.log(location);
+    // console.log(location);
+    geocodeByAddress('Los Angeles, CA')
+    .then(results => console.log(getLatLng(results)))
+    .catch(error => console.error(error));
+    // console.log(getLatLng(location));
     this.setState({ location: location})
   }
   
@@ -293,7 +297,6 @@ class EventForm extends Component {
                 />
                 </Label>
               </Form.Group> */}
-
               <PlacesAutocomplete
                 value={location}
                 onChange={this.handlePlaceChange}
@@ -307,7 +310,7 @@ class EventForm extends Component {
                 onChange={this.handleChange}
                 name='location'
               /> */}
-              <Form.Group>
+              {/* <Form.Group>
                 <Form.Input 
                   label='Latitude' 
                   placeholder='Latitude' 
@@ -322,7 +325,7 @@ class EventForm extends Component {
                   name='longtitude'
                   onChange={this.handleChange}
                 />
-              </Form.Group>
+              </Form.Group> */}
               <Form.Group >
                 <Form.Select
                   options={recurrOptions}
