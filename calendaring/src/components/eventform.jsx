@@ -8,21 +8,21 @@ import fileDownload from 'js-file-download';
 import '../App.css';
 import Alert from '@material-ui/lab/Alert';
 import DateAndTimePickers from './datePicker';
+import TimezonePicker from 'react-bootstrap-timezone-picker';
+import 'react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css';
 // import Button from '@material-ui/core/Button';
 // import SaveIcon from '@material-ui/icons/Save';
 // import TextField from '@material-ui/core/TextField';
 // import Container from '@material-ui/core/Container';
 // import { Icon } from '@material-ui/core';
 // import Map from './map'
-// import TimezonePicker from 'react-bootstrap-timezone-picker';
-// import 'react-bootstrap-timezone-picker/dist/react-bootstrap-timezone-picker.min.css';
 // import LocationPickerExample from './locationPicker'
 // import AlertDialog from './alertDialog'
 // import AppBar from './appBar'
-// import PlacesAutocomplete, {
-//   geocodeByAddress,
-//   getLatLng,
-// } from 'react-places-autocomplete';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 
 const options = [
   { key: 'm', text: 'Male', value: 'male' },
@@ -112,6 +112,11 @@ class EventForm extends Component {
     this.setState({ [name]: value })
   }
 
+  handlePlaceChange = (location) => {
+    console.log(location);
+    this.setState({ location: location})
+  }
+  
   handleTimezoneChange = (userTimezone) => {
     this.setState({ timezone: userTimezone})
   }
@@ -206,6 +211,25 @@ class EventForm extends Component {
     return true;
   }
 
+  formReset = () => {
+    console.log('FormReset');
+    this.setState({errorToggle: false});
+  }
+
+  renderFunc = ({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
+    <div className="autocomplete-root">
+      <input {...getInputProps({placeholder: 'Location'})} />
+      <div className="autocomplete-dropdown-container">
+        {loading && <div>Loading...</div>}
+        {suggestions.map(suggestion => (
+          <div {...getSuggestionItemProps(suggestion)}>
+            <span>{suggestion.description}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   render() { 
     const{classification, latitude, longtitude, summary, start, end, priority, location, recurr, count, errorToggle, error, timezone} = this.state;
 
@@ -245,7 +269,13 @@ class EventForm extends Component {
                 selected={this.state.date} 
                 onChange={this.handleDateEndChange} 
                 name= 'end'
-              />              
+              />           
+              <TimezonePicker
+                absolute      = {false}
+                defaultValue  = {timezone}
+                placeholder   = "Select timezone..."
+                onChange      = {this.handleTimezoneChange}
+              />                 
               {/* <Form.Group>
                 <Form.Input 
                   width={12}
@@ -263,12 +293,20 @@ class EventForm extends Component {
                 />
                 </Label>
               </Form.Group> */}
-              <Form.Input inline fluid
+
+              <PlacesAutocomplete
+                value={location}
+                onChange={this.handlePlaceChange}
+                onSelect={this.handlePlaceChange}
+              >
+                {this.renderFunc}
+              </PlacesAutocomplete>
+              {/* <Form.Input inline fluid
                 label='Location' 
                 placeholder='Location' 
                 onChange={this.handleChange}
                 name='location'
-              />
+              /> */}
               <Form.Group>
                 <Form.Input 
                   label='Latitude' 
