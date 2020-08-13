@@ -38,7 +38,6 @@
 }
 
 body {
-  background-color: #4f7db0;
   color: white;
 }
 
@@ -46,10 +45,11 @@ body {
 .container {
   margin: 2% 17% 2% 17%;
   padding: 25px;
-  border-width: 3px;
-  border-color: white;
+  border-width: 5px;
+  border-color: #4f7db0;
   border-style: solid;
   border-radius: 5px;
+  background-color: #4f7db0;
 }
 
 .button {
