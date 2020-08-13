@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Form, Icon } from 'semantic-ui-react'
+import { Form, Icon, Container, Label, Grid } from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Vevents from '../vevents';
 import Ics from '../ics';
 import fileDownload from 'js-file-download';
+import '../App.css';
 
 const options = [
-  { key: 'm', text: 'Malee', value: 'male' },
+  { key: 'm', text: 'Male', value: 'male' },
   { key: 'f', text: 'Female', value: 'female' },
   { key: 'o', text: 'Other', value: 'other' },
 ]
@@ -27,7 +28,7 @@ const recurrOptions = [
 const countOptions = [
     { text: 'Indefinitely', value: '' },
     { text: '1', value: 'COUNT=1' },
-    { text: '2', value: 'COUNT=2' }
+    { text: '2', value: 'COUNT=2' },
     { text: '3', value: 'COUNT=3' },
     { text: '4', value: 'COUNT=4' },
     { text: '5', value: 'COUNT=5' },
@@ -93,7 +94,7 @@ class EventForm extends Component {
     let {classification, latitude, longtitude, location, priority, summary, start, end, recurr, count} = this.state; 
     start = this.buildDate(start);
     end = this.buildDate(end);
-    let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end, recurr)];
+    let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end, recurr, count)];
     let icsCalendar = new Ics(icsEvent);
     let calendar = icsCalendar.build();
     console.log(this.state);
@@ -104,113 +105,120 @@ class EventForm extends Component {
     const{classification, latitude, longtitude, summary, start, end, priority, location, recurr, count} = this.state;
 
     return (  
-      <React.Fragment>
-      <Form method="get" action="../App.js">
-        <Form.Select
-          label='Classification'
-          options={classificatication}
-          placeholder='Classification'
-          value={classification}
-          width={2}
-          name='classification'
-          onChange={this.handleChange}
-        />
-        <Form.Input 
-          inline 
-          label='Latitude' 
-          placeholder='Latitude' 
-          value={latitude}
-          name='latitude'
-          onChange={this.handleChange}
-        />
-        <Form.Input 
-          inline 
-          label='Longtitude' 
-          placeholder='Longtitude' 
-          value={longtitude}
-          name='longtitude'
-          onChange={this.handleChange}
-        />
-        <Form.Input 
-          inline 
-          label='Summary' 
-          value={summary}
-          onChange={this.handleChange}
-          name='summary'
-        />
-        <Form.Group inline>
-          <Form.Input 
-            readOnly
-            label='Start' 
-            placeholder='StartDate' 
-            width={2}
-            value={start}
-          />
-          <Icon>
-            <DatePicker 
-            selected={this.state.date} 
-            onChange={this.handleDateStartChange} 
-            name={start}
-          />
-          </Icon>
-        </Form.Group>
-        <Form.Group inline>
-          <Form.Input 
-            label='EndDate' 
-            placeholder='EndDate' 
-            width={2}
-            value={end}
-            readOnly
-          />
-          <Icon>
-            <DatePicker 
-            selected={this.state.date} 
-            onChange={this.handleDateEndChange} 
-            name={end}
-          />
-          </Icon>
-        </Form.Group>
-        <Form.Input 
-          label='Priority' 
-          placeholder='Priority: 1-10' 
-          width={2}
-          onChange={this.handleChange}
-          name='priority'
-        />
-        <Form.Input 
-          label='Location' 
-          placeholder='Location' 
-          width={2}
-          onChange={this.handleChange}
-          name='location'
-        />
-        <Form.Group>
-          <Form.Select
-            width={6}
-            control={Select}
-            options={recurrOptions}
-            label='Recurring'
-            placeholder='Recurring'
-            name='recurr'
-            onChange={this.handleChange}
-          />
-          <Form.Select
-            width={6}
-            control={Select}
-            options={countOptions}
-            label='Count'
-            placeholder='Count'
-            name='count'
-            onChange={this.handleChange}
-          />
-        /Form.Group>
-      </Form>
-      <button
-        onClick={this.handleSubmit}
-      >
-       Click to download file
-      </button>
-    </React.Fragment>
+      <React.Fragment >
+        <Container className='Container'>
+            <Grid centered >
+              <h1>Create A Downloadable Calendar Event File</h1>
+            </Grid>
+            <Form method="get" action="../App.js">
+              <Form.Input
+                fluid
+                inline 
+                placeholder='Title...'
+                label='Title' 
+                value={summary}
+                onChange={this.handleChange}
+                name='summary'
+                size='huge'
+              />
+              <Form.Group >
+                <Form.Input 
+                  width={12}
+                  readOnly
+                  label='Start Date' 
+                  placeholder='StartDate' 
+                  value={start}
+                />
+                <Label>
+                  <Icon name='calendar outline' size='big'/>
+                  <DatePicker 
+                  selected={this.state.date} 
+                  onChange={this.handleDateStartChange} 
+                  name={start}
+                />
+                </Label>
+              </Form.Group>
+              <Form.Group>
+                <Form.Input 
+                  width={12}
+                  label='End Date' 
+                  placeholder='EndDate'
+                  value={end}
+                  readOnly
+                />
+                <Label>
+                  <Icon name='calendar outline' size='big'/>
+                  <DatePicker 
+                  selected={this.state.date} 
+                  onChange={this.handleDateEndChange} 
+                  name={end}
+                />
+                </Label>
+              </Form.Group>
+              <Form.Input inline fluid
+                label='Location' 
+                placeholder='Location' 
+                onChange={this.handleChange}
+                name='location'
+              />
+              <Form.Group>
+                <Form.Input 
+                  label='Latitude' 
+                  placeholder='Latitude' 
+                  value={latitude}
+                  name='latitude'
+                  onChange={this.handleChange}
+                />
+                <Form.Input
+                  label='Longtitude' 
+                  placeholder='Longtitude' 
+                  value={longtitude}
+                  name='longtitude'
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group >
+                <Form.Select
+                  options={recurrOptions}
+                  label='Recurring'
+                  placeholder='Recurring'
+                  name='recurr'
+                  onChange={this.handleChange}
+                />
+                <Form.Select
+                  options={countOptions}
+                  label='Count'
+                  placeholder='Count'
+                  name='count'
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Select 
+                width={4}
+                label='Classification'
+                options={classificatication}
+                placeholder='Classification'
+                value={classification}
+                name='classification'
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                width={4}
+                label='Priority' 
+                placeholder='Priority: 1-10' 
+                onChange={this.handleChange}
+                name='priority'
+              />
+            </Form>
+            <Grid centered>
+              <button className='button'
+                onClick={this.handleSubmit}
+              >
+               Click to download file
+              </button>
+            </Grid>
+        </Container>
+      </React.Fragment>
     );
   }
 }
