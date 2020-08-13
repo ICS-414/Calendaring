@@ -184,8 +184,8 @@ class EventForm extends Component {
           onChange={this.handleChange}
           name='location'
         />
-        <Form.Group inline>
-          <Form.Input
+        <Form.Group>
+          <Form.Select
             width={6}
             control={Select}
             options={recurrOptions}
@@ -194,7 +194,7 @@ class EventForm extends Component {
             name='recurr'
             onChange={this.handleChange}
           />
-          <Form.Input
+          <Form.Select
             width={6}
             control={Select}
             options={countOptions}
