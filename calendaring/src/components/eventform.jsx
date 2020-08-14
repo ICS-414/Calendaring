@@ -88,8 +88,8 @@ class EventForm extends Component {
 
   state = {
       classification:'PUBLIC',
-      latitude: '',
-      longtitude: '' ,
+      latitude: 'Lat',
+      longtitude: 'Long' ,
       summary:'',
       start: new Date(),
       end: new Date(),  
@@ -113,14 +113,19 @@ class EventForm extends Component {
   }
 
   handlePlaceChange = (location) => {
-    console.log(location);
     geocodeByAddress(location)
-    .then(results => console.log(results[1]))
-    .catch(error => console.error(error));
+    .then(results => getLatLng(results[0]))
+    .then(latLng => {
+      const {lat,lng} = latLng;
+      this.setState({ latitude: lat});
+      this.setState({ longtitude: lng});
+    })
+    .catch(error => console.error('Error', error));
     // // console.log(getLatLng(location));
     //getLatLng(results)
     //getLatLng(results.geometry)
     this.setState({ location: location})
+    console.log(this.state);
   }
   
   handleTimezoneChange = (userTimezone) => {
