@@ -185,13 +185,14 @@ class EventForm extends Component {
   buildDate = (date) => {
     console.log('date is being built');
     console.log(date);
-    date.replace('-', '');
-    date + '200000'
+    let buildDate  = date.replace(/-/g, '');
+    buildDate = buildDate.replace(/:/g, '');
+    buildDate = buildDate.concat('00');
     // let year = date.getYear() + 1900;
     // let month = date.getMonth() + 1  > 9 ? date.getMonth() +1  : '0' + (date.getMonth() + 1);
     // let day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
     // let buildDate = `${year}${month}${day}`;
-    return date;
+    return buildDate;
   }
   
   
@@ -211,8 +212,8 @@ class EventForm extends Component {
       let {classification, latitude, longtitude, location, priority, summary, start, end, timezone,recurr, count} = this.state; 
       start = this.buildDate(start);
       end = this.buildDate(end);
-      let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end, recurr, count)];
-      let icsCalendar = new Ics(icsEvent,timezone);
+      let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end, recurr, count,timezone)];
+      let icsCalendar = new Ics(icsEvent);
       let calendar = icsCalendar.build();
       fileDownload(calendar, 'Calendar.ics');
     }
