@@ -210,7 +210,7 @@ class EventForm extends Component {
 
 
     if (this.formComplete() === true){
-      let {classification, latitude, longtitude, location, priority, summary, start, end, timezone,recurr, count} = this.state; 
+      let {classification, latitude, longtitude, location, priority, summary, start, end, timezone,recurr, count, resources} = this.state; 
       start = this.buildDate(start);
       end = this.buildDate(end);
       let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end, recurr, count,timezone, resources)];
