@@ -113,11 +113,13 @@ class EventForm extends Component {
   }
 
   handlePlaceChange = (location) => {
-    // console.log(location);
-    geocodeByAddress('Los Angeles, CA')
-    .then(results => console.log(getLatLng(results)))
+    console.log(location);
+    geocodeByAddress(location)
+    .then(results => console.log(results[1]))
     .catch(error => console.error(error));
-    // console.log(getLatLng(location));
+    // // console.log(getLatLng(location));
+    //getLatLng(results)
+    //getLatLng(results.geometry)
     this.setState({ location: location})
   }
   
@@ -360,13 +362,13 @@ class EventForm extends Component {
                 name='priority'
                 onChange={this.handleChange}
               />              
-              <Form.Input
+              {/* <Form.Input
                 width={4}
                 label='Priority' 
                 placeholder='Priority: 1-10' 
                 onChange={this.handleChange}
                 name='priority'
-              />
+              /> */}
             </Form>
             <Grid centered>
               <button className='button'
