@@ -1,5 +1,5 @@
 export default class Vevents {
-  constructor(classification, latitude, longtitude, location, priority, summary, start, end, recurr, count, timezone) {
+  constructor(classification, latitude, longtitude, location, priority, summary, start, end, recurr, count, timezone, resources) {
     this.begin = 'Begin:VEVENT';
     this.classification = 'CLASS:' + (classification || 'PUBLIC');
     this.geo = 'GEO:' + latitude + ';' + longtitude;
@@ -9,6 +9,7 @@ export default class Vevents {
     this.recurr = (recurr == '') ? '' : 'RRULE:FREQ=' + recurr + ';' + count;
     this.priority = 'PRIORITY:' + priority;
     this.location = 'LOCATION:' + location;
+    this.resources = 'RESOURCES:' + resources;
     this.ending = 'END:VEVENT';
     // this.description = 'DESCRIPTION:' +  description;
     // this.modified = new Date();

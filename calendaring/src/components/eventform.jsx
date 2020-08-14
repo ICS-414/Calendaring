@@ -97,6 +97,7 @@ class EventForm extends Component {
       location: '',
       recurr: ' ',
       count: ' ',
+      resources: '', 
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       errorToggle: false,
       error: 'None'
@@ -212,7 +213,7 @@ class EventForm extends Component {
       let {classification, latitude, longtitude, location, priority, summary, start, end, timezone,recurr, count} = this.state; 
       start = this.buildDate(start);
       end = this.buildDate(end);
-      let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end, recurr, count,timezone)];
+      let icsEvent = [new Vevents(classification, latitude, longtitude, location, priority, summary, start, end, recurr, count,timezone, resources)];
       let icsCalendar = new Ics(icsEvent);
       let calendar = icsCalendar.build();
       fileDownload(calendar, 'Calendar.ics');
@@ -267,7 +268,7 @@ class EventForm extends Component {
   );
 
   render() { 
-    const{classification, latitude, longtitude, summary, start, end, priority, location, recurr, count, errorToggle, error, timezone} = this.state;
+    const{classification, latitude, longtitude, summary, start, end, priority, location, recurr, count, errorToggle, error, timezone, resources} = this.state;
 
     if(errorToggle === true){
       console.log('Error Toggle');
@@ -391,7 +392,17 @@ class EventForm extends Component {
                 value={priority}
                 name='priority'
                 onChange={this.handleSelectOptionForms}
-              />              
+              />    
+              <Form.Input
+                fluid
+                inline 
+                placeholder='resources'
+                label='Resources' 
+                value={resources}
+                onChange={this.handleChange}
+                name='resources'
+                size='medium'
+              />          
               {/* <Form.Input
                 width={4}
                 label='Priority' 
