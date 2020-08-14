@@ -112,6 +112,12 @@ class EventForm extends Component {
     this.setState({ [name]: value })
   }
 
+  handleSelectOptionForms = (e, {name, value}) => {
+    console.log(name);
+    console.log(value);
+    this.setState({ [name]: value })
+  }
+
   handlePlaceChange = (location) => {
     geocodeByAddress(location)
     .then(results => getLatLng(results[0]))
@@ -129,6 +135,7 @@ class EventForm extends Component {
   }
   
   handleTimezoneChange = (userTimezone) => {
+    console.log(userTimezone);
     this.setState({ timezone: userTimezone})
   }
 
@@ -339,14 +346,14 @@ class EventForm extends Component {
                   label='Recurring'
                   placeholder='Recurring'
                   name='recurr'
-                  onChange={this.handleChange}
+                  onChange={this.handleSelectOptionForms}
                 />
                 <Form.Select
                   options={countOptions}
                   label='Count'
                   placeholder='Count'
                   name='count'
-                  onChange={this.handleChange}
+                  onChange={this.handleSelectOptionForms}
                 />
               </Form.Group>
               <Form.Select 
@@ -356,7 +363,7 @@ class EventForm extends Component {
                 placeholder='Classification'
                 value={classification}
                 name='classification'
-                onChange={this.handleChange}
+                onChange={this.handleSelectOptionForms}
               />
               <Form.Select 
                 width={4}
@@ -365,7 +372,7 @@ class EventForm extends Component {
                 placeholder='priority'
                 value={priority}
                 name='priority'
-                onChange={this.handleChange}
+                onChange={this.handleSelectOptionForms}
               />              
               {/* <Form.Input
                 width={4}
