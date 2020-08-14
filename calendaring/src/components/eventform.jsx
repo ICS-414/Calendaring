@@ -91,8 +91,8 @@ class EventForm extends Component {
       latitude: 'Lat',
       longtitude: 'Long' ,
       summary:'',
-      start: new Date(),
-      end: new Date(),  
+      start: '' ,
+      end: '',  
       priority:'',
       location: '',
       recurr: '',
@@ -111,6 +111,15 @@ class EventForm extends Component {
     console.log('Handle Change Called');
     this.setState({ [name]: value })
   }
+
+  dateToISOLocal(date) {
+    const offsetMs = date.getTimezoneOffset() * 60 * 1000;
+    const msLocal =  date.getTime() - offsetMs;
+    const dateLocal = new Date(msLocal);
+    const iso = dateLocal.toISOString();
+    const isoLocal = iso.slice(0, 19);
+    return isoLocal;
+}
 
   handleSelectOptionForms = (e, {name, value}) => {
     console.log(name);
@@ -150,9 +159,12 @@ class EventForm extends Component {
     }else{
       this.setState({ 'start': event.target.value })
     }
+    console.log(this.state);
+
   }
 
   handleDateEndChange = (event) => {
+    console.log(event.target.value);
     const endDate = new Date(event.target.value);
     const startDate = new Date(this.state.start);
     // console.log(endDate);
@@ -163,6 +175,7 @@ class EventForm extends Component {
       console.log(this.state);
     }else{
       this.setState({ 'end': event.target.value})
+      console.log(this.state);
     }
   }
 
@@ -170,11 +183,15 @@ class EventForm extends Component {
    * Processes the dates to have to correct offsets and conform to ics calendar requirments
    */
   buildDate = (date) => {
-    let year = date.getYear() + 1900;
-    let month = date.getMonth() + 1  > 9 ? date.getMonth() +1  : '0' + (date.getMonth() + 1);
-    let day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
-    let buildDate = `${year}${month}${day}`;
-    return buildDate;
+    console.log('date is being built');
+    console.log(date);
+    date.replace('-', '');
+    date + '200000'
+    // let year = date.getYear() + 1900;
+    // let month = date.getMonth() + 1  > 9 ? date.getMonth() +1  : '0' + (date.getMonth() + 1);
+    // let day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+    // let buildDate = `${year}${month}${day}`;
+    return date;
   }
   
   
@@ -277,14 +294,14 @@ class EventForm extends Component {
               />
               <DateAndTimePickers 
                 id='Start'
-                selected={this.state.date} 
+                selected={new Date()} 
                 onChange={this.handleDateStartChange} 
                 name='start'
               />
 
               <DateAndTimePickers
                 id='End'
-                selected={this.state.date} 
+                selected={new Date()} 
                 onChange={this.handleDateEndChange} 
                 name= 'end'
               />           

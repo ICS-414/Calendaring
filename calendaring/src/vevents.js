@@ -4,8 +4,8 @@ export default class Vevents {
     this.classification = 'CLASS:' + (classification || 'PUBLIC');
     this.geo = 'GEO:' + latitude + ';' + longtitude;
     this.summary = 'SUMMARY:' + summary;
-    this.start = 'DTSTART;VALUE=DATE:' + start;
-    this.end = 'DTEND;VALUE=DATE:' + end;
+    this.start = 'DTSTART:' + start;
+    this.end = 'DTEND:' + end;
     this.recurr = (recurr == '') ? '' : 'RRULE:FREQ=' + recurr + ';' + count;
     this.priority = 'PRIORITY:' + priority;
     this.location = 'LOCATION:' + location;
