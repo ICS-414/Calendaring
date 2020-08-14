@@ -50,7 +50,6 @@ const priorityOptions = [
 
 
 const recurrOptions = [
-    { text: 'Yearly', value: 'YEARLY' },
     { text: 'Weekly', value: 'WEEKLY' },
     { text: 'Daily', value: 'DAILY' },
     { text: 'None', value: ' ' }
