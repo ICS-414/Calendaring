@@ -53,11 +53,11 @@ const recurrOptions = [
     { text: 'Yearly', value: 'YEARLY' },
     { text: 'Weekly', value: 'WEEKLY' },
     { text: 'Daily', value: 'DAILY' },
-    { text: 'None', value: '' }
+    { text: 'None', value: ' ' }
 ]
 
 const countOptions = [
-    { text: 'Indefinitely', value: '' },
+    { text: 'Indefinitely', value: ' ' },
     { text: '1', value: 'COUNT=1' },
     { text: '2', value: 'COUNT=2' },
     { text: '3', value: 'COUNT=3' },
@@ -95,8 +95,8 @@ class EventForm extends Component {
       end: '',  
       priority:'',
       location: '',
-      recurr: '',
-      count: '',
+      recurr: ' ',
+      count: ' ',
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       errorToggle: false,
       error: 'None'
