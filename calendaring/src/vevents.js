@@ -6,7 +6,7 @@ export default class Vevents {
     this.summary = 'SUMMARY:' + summary;
     this.start = 'DTSTART;TZID='+ timezone + ':' + start;
     this.end = 'DTEND;TZID='+ timezone + ':' + end;
-    this.recurr = (recurr == '') ? '' : 'RRULE:FREQ=' + recurr + ';' + count;
+    this.recurr = (recurr == ' ') ? '' : 'RRULE:FREQ=' + recurr + ';' + count;
     this.priority = 'PRIORITY:' + priority;
     this.location = 'LOCATION:' + location;
     this.resources = 'RESOURCES:' + resources;
